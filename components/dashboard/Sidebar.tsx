@@ -4,6 +4,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import {
 	AcademicCapIcon,
 	BookOpenIcon,
+	ClipboardDocumentCheckIcon,
 	Cog6ToothIcon,
 	HomeIcon,
 	UserCircleIcon,
@@ -18,6 +19,12 @@ const navigation = [
 		href: '/dashboard',
 		icon: HomeIcon,
 		roles: ['super_admin', 'admin', 'teacher', 'student', 'parent'],
+	},
+	{
+		name: 'Testlar',
+		href: '/test',
+		icon: ClipboardDocumentCheckIcon,
+		roles: ['super_admin', 'admin', 'teacher', 'student'],
 	},
 	{
 		name: "O'quvchilar",
@@ -72,7 +79,9 @@ export function Sidebar() {
 						<li>
 							<ul role='list' className='-mx-2 space-y-1'>
 								{filteredNavigation.map(item => {
-									const isActive = pathname === item.href
+									const isActive =
+										pathname === item.href ||
+										pathname?.startsWith(item.href + '/')
 									return (
 										<li key={item.name}>
 											<Link
